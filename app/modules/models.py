@@ -252,6 +252,9 @@ class Module(ClusterableModel):
     def __str__(self):
         return self.title
 
+    def is_educator(self, **kwargs):
+      return self.audience_relationship.filter(audience=6)
+
 class ModuleTagRelationship(models.Model):
     module = ParentalKey(
         'Module',
