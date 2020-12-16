@@ -11,7 +11,7 @@ from wagtail.snippets.models import register_snippet
 @register_snippet
 class Program(models.Model):
     program_name = models.CharField(max_length=100)
-    program_description = RichTextField(null=True, blank=True)
+    # program_description = RichTextField(null=True, blank=True)
     program_url = models.URLField(null=True)
     program_color = models.CharField(max_length=15, null=True)
 

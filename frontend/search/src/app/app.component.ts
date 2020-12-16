@@ -59,6 +59,12 @@ export class AppComponent {
   lessons = [];
   selected_lessons;
   selected_lesson_count: number = 0;
+  standards = [];
+  selected_standards;
+  selected_standards_count: number = 0;
+
+  standards_bodies = [];
+  standards_raw = [];
 
   activities = [];
   selected_activities;
@@ -152,6 +158,20 @@ export class AppComponent {
         element.selected = false;
       });
       this.getSelectedPrograms();
+    });
+
+    this.currService.getStandardsBodies(this.baseURL).subscribe((data: dataStructure) => {
+      this.standards_bodies = data.items;
+      console.log("Standards Bodies: ", this.standards_bodies);
+      this.currService.getStandards(this.baseURL).subscribe((data:dataStructure) => {
+        this.standards_raw = data.items;
+        console.log("Raw Standards: ", this.standards_raw);
+      });
+      this.standards_bodies.forEach(standards_body => {
+        standards_body.standards = [];
+        this.standards.push(standards_body)
+      });
+      console.log("Standards: ", this.standards);
     });
 
   }

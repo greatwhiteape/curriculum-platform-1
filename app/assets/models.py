@@ -121,7 +121,7 @@ class Asset(ClusterableModel):
         learning_spaces = [
             n.learning_space for n in self.learningspace_relationship.all()
         ]
-        return tags
+        return learning_spaces
 
     @property
     def tags(self):

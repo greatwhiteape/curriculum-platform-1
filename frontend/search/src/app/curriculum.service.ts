@@ -25,8 +25,15 @@ export class CurriculumService {
     return this.http.get(baseURL + 'api/v2/audiences/?format=json');
   };
 
+  public getStandardsBodies(baseURL) {
+    return this.http.get(baseURL + 'api/v2/standards-body/?format=json');
+  };
+
+  public getStandards(baseURL) {
+    return this.http.get(baseURL + 'api/v2/standards/?format=json');
+  };
+
   public getLearningSpaces(baseURL) {
-    console.log('learning Spaces: ', baseURL + 'api/v2/learning-spaces/?format=json')
     return this.http.get(baseURL + 'api/v2/learning-spaces/?format=json');
   };
 
