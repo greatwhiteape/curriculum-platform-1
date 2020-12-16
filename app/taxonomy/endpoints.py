@@ -8,14 +8,14 @@ class ProgramsAPIEndpoint(BaseAPIViewSet):
 
     body_fields = BaseAPIViewSet.body_fields + [
         'program_name',
-        'program_description',
+        # 'program_description',
         'program_url',
         'program_color'
     ]
 
     listing_default_fields = BaseAPIViewSet.listing_default_fields + [
         'program_name',
-        'program_description',
+        # 'program_description',
         'program_url',
         'program_color'
     ]
