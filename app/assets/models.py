@@ -157,7 +157,7 @@ class Asset(ClusterableModel):
       InlinePanel('learning_space', label="Learning Space"),
       InlinePanel('standards_relationship', label="Standards Alignment"),
       InlinePanel('topic_relationship', label="Topics"),
-      InlinePanel('tag_relationship', label="Tags"),
+      # InlinePanel('tag_relationship', label="Tags"),
     ]
 
     api_fields = [
