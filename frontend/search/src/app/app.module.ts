@@ -15,6 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AssetTypePipe } from './asset-type.pipe';
 import { ActivityTypePipe } from './activity-type.pipe';
 import { LearningSpacePipe } from './learning-space.pipe';
+import { TimeEstimatePipe } from './time-estimate.pipe';
 
 @NgModule({
    declarations: [
@@ -28,6 +29,7 @@ import { LearningSpacePipe } from './learning-space.pipe';
       ActivityTypePipe,
       LearningSpacePipe,
       LearningSpacePipe,
+      TimeEstimatePipe,
    ],
    imports: [
       BrowserModule,

@@ -53,6 +53,10 @@ export class CurriculumService {
     return this.http.get(baseURL + 'api/v2/activity-type/?format=json');
   };
 
+  public getTimeEstimates(baseURL) {
+    return this.http.get(baseURL + 'api/v2/time-estimates/?format=json');
+  };
+
   public getModules(baseURL) {
     return this.http.get(baseURL + 'api/v2/modules/?format=json');
   };

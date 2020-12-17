@@ -35,26 +35,22 @@ urlpatterns = [
     # CAS
     path(r'admin/login/', cas.views.login, name='login'),
     path(r'admin/logout/', cas.views.logout, name='logout'),
-    # path(r'users/login/', cas.views.login, name="login"),
-    # path(r'users/logout/', cas.views.logout, name="logout"),
 
     url(r'^admin/', include(wagtailadmin_urls)),
-    url(r'^documents/', include(wagtaildocs_urls)),
+    # url(r'^documents/', include(wagtaildocs_urls)),
 
-    url(r'^search/$', search_views.search, name='search'),
+    # url(r'^search/$', search_views.search, name='search'),
 
-
-    url(r'^api/doc/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^api/v2/', api_router.urls),
-
-    url(r'curriculum/activity/', include('activity.urls')),
-    url(r'curriculum/assets/', include('assets.urls')),
-    url(r'curriculum/modules/', include('modules.urls')),
-
+    url(r'^api/doc/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     # API Documentation Examples...
     # url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     # url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     # url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
+    url(r'curriculum/activity/', include('activity.urls')),
+    url(r'curriculum/assets/', include('assets.urls')),
+    url(r'curriculum/modules/', include('modules.urls')),
 ]
 
 

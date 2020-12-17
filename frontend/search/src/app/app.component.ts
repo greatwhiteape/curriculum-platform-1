@@ -62,6 +62,9 @@ export class AppComponent {
   standards = [];
   selected_standards;
   selected_standards_count: number = 0;
+  time_estimates = [];
+  selected_time_estimates;
+  selected_time_estimates_count: number = 0;
 
   standards_bodies = {};
 
@@ -107,6 +110,13 @@ export class AppComponent {
         element.selected = false;
       });
     });
+
+    this.currService.getTimeEstimates(this.baseURL).subscribe((data: dataStructure) => {
+      this.time_estimates = data.items;
+      this.time_estimates.forEach(element => {
+        element.selected = false;
+      });
+    })
 
     this.currService.getTopics(this.baseURL).subscribe((data: dataStructure) => {
       this.topics = data.items;
@@ -217,9 +227,17 @@ export class AppComponent {
     });
   }
 
-  // Getting Selected programs and Count
+  // Getting Selected Learning Spaces and Count
   getSelectedLearningSpaces() {
     this.selected_learning_spaces = this.learning_spaces.filter(s => {
+      return s.selected;
+    });
+  }
+
+  // Getting Selected Time Estimates and Count
+  getSelectedTimeEstimates() {
+    this.selected_time_estimates = this.time_estimates.filter(s => {
+      console.log('S.selected: ', s)
       return s.selected;
     });
   }
@@ -244,7 +262,8 @@ export class AppComponent {
     this.getSelectedActivityTypes();
     this.getSelectedAssetTypes();
     this.getSelectedLearningSpaces();
-    this.getSelectedStandards
+    this.getSelectedStandards();
+    this.getSelectedTimeEstimates();
   }
 
   deleteModulesOnly() {
@@ -327,6 +346,17 @@ export class AppComponent {
       return true;
     });
     this.getSelectedLearningSpaces();
+  }
+
+  // Delete Single Listed program Tag
+  deleteTimeEstimates(id: number) {
+    this.time_estimates = this.time_estimates.filter(g => {
+      if (g.id == id) {
+        g.selected = false;
+      }
+      return true;
+    });
+    this.getSelectedTimeEstimates();
   }
 
   // Delete Single Listed program Tag

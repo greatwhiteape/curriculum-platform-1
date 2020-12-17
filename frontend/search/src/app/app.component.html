@@ -148,7 +148,6 @@
         </ng-template>
       </ngb-panel>
       <!-- Learning Space Panel -->
-      LS: {{ learning_spaces }}
       <ngb-panel>
         <ng-template ngbPanelHeader let-opened="opened">
           <div class="d-flex align-items-center justify-content-between">
@@ -179,6 +178,42 @@
                           value="{{a.id}}"
                           [(ngModel)]="a.selected"/>
                 <label class="custom-control-label topic-text text-muted ml-2" for="learningspace_{{a.id}}">{{a.learning_space}}</label>
+              </div>
+            </li>
+          </ul>
+        </ng-template>
+      </ngb-panel>
+      <!-- Time Estimates Panel -->
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle class="btn btn-link container-fluid text-left pl-0">
+              <h5 class="mt-4">
+                Time Estimates
+                <fa-icon *ngIf="!opened" class="float-right" [icon]="this.faPlus"></fa-icon>
+                <fa-icon *ngIf="opened" class="float-right" [icon]="this.faMinus"></fa-icon>
+              </h5>
+            </button>
+            <div>
+              <!-- <button type="button" class="btn btn-sm btn-outline-secondary ml-2" (click)="disabled = !disabled">
+                {{ disabled ? 'En' : 'Dis' }}able third
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-danger ml-2" (click)="a.collapseAll()">Collapse all</button> -->
+            </div>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <ul id="timeestimates-list" class="list-group select-list">
+            <li *ngFor="let a of time_estimates" class="timeestimates-item list-group-item p-0 border-0">
+              <div class="custom-control custom-checkbox">
+                <input class="custom-control-input"
+                          (change)="getSelectedTimeEstimates()"
+                          type="checkbox"
+                          id="timeestimates_{{a.id}}"
+                          name="time_estimate"
+                          value="{{a.id}}"
+                          [(ngModel)]="a.selected"/>
+                <label class="custom-control-label topic-text text-muted ml-2" for="timeestimates_{{a.id}}">{{a.time_estimate}}</label>
               </div>
             </li>
           </ul>
@@ -285,7 +320,7 @@
         <a ngbNavLink><h5 class="my-lg-4 mx-lg-3">Modules</h5></a>
         <ng-template ngbNavContent>
           <div id="module_container">
-            <ul id="module_search_results" class="list-group search-results" *ngFor="let module of this.modules | programs: selected_programs | audiences: selected_audiences | tag: selected_tags | topic: selected_topics | learningSpace: selected_learning_spaces">
+            <ul id="module_search_results" class="list-group search-results" *ngFor="let module of this.modules | programs: selected_programs | audiences: selected_audiences | tag: selected_tags | topic: selected_topics | learningSpace: selected_learning_spaces | timeEstimate: selected_time_estimates">
               <li class="list-group-item border-0">
                 <a href="{{ baseURL }}curriculum/modules/{{ module.id }}-{{ module.slug }}">
                   <h3 class="h3">
@@ -302,7 +337,7 @@
         <a ngbNavLink><h5 class="my-lg-4 mx-lg-3">Lessons</h5></a>
         <ng-template ngbNavContent>
           <div id="activity_container">
-            <ul class="list-group" *ngFor="let activity of this.activities | programs: selected_programs | audiences: selected_audiences | tag: selected_tags | topic: selected_topics | activityType: selected_activity_types | learningSpace: selected_learning_spaces">
+            <ul class="list-group" *ngFor="let activity of this.activities | programs: selected_programs | audiences: selected_audiences | tag: selected_tags | topic: selected_topics | activityType: selected_activity_types | learningSpace: selected_learning_spaces | timeEstimate: selected_time_estimates">
               <ng-container>
                 <li class="list-group-item border-0">
                   <a href="{{ baseURL }}curriculum/activity/{{ activity.id }}-{{ activity.slug }}" target="_blank">
