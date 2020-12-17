@@ -63,8 +63,7 @@ export class AppComponent {
   selected_standards;
   selected_standards_count: number = 0;
 
-  standards_bodies = [];
-  standards_raw = [];
+  standards_bodies = {};
 
   activities = [];
   selected_activities;
@@ -161,21 +160,24 @@ export class AppComponent {
     });
 
     this.currService.getStandardsBodies(this.baseURL).subscribe((data: dataStructure) => {
-      this.standards_bodies = data.items;
-      console.log("Standards Bodies: ", this.standards_bodies);
-      this.currService.getStandards(this.baseURL).subscribe((data:dataStructure) => {
-        this.standards_raw = data.items;
-        console.log("Raw Standards: ", this.standards_raw);
-      });
-      this.standards_bodies.forEach(standards_body => {
+      data.items.forEach(standards_body => {
         standards_body.standards = [];
-        this.standards.push(standards_body)
+        this.standards_bodies[standards_body.id] = standards_body;
       });
-      console.log("Standards: ", this.standards);
+
+    });
+
+    this.currService.getStandards(this.baseURL).subscribe((data:dataStructure) => {
+      data.items.forEach(standard => {
+        this.standards_bodies[standard.standard_group.id].standards.push(standard)
+      })
+
+      for (const tmp in this.standards_bodies) {
+        if (this.standards_bodies[tmp].standards.length>0) this.standards.push(this.standards_bodies[tmp]);
+      }
     });
 
   }
-
 
   // Getting Selected programs and Count
   getSelectedPrograms() {
@@ -222,6 +224,13 @@ export class AppComponent {
     });
   }
 
+  // Getting Selected programs and Count
+  getSelectedStandards() {
+    this.selected_standards = this.standards.filter(s => {
+      return s.selected;
+    });
+  }
+
   // Clearing All Selections
   clearSelection() {
     this.programs = this.programs.filter(g => {
@@ -235,6 +244,7 @@ export class AppComponent {
     this.getSelectedActivityTypes();
     this.getSelectedAssetTypes();
     this.getSelectedLearningSpaces();
+    this.getSelectedStandards
   }
 
   deleteModulesOnly() {
@@ -317,6 +327,17 @@ export class AppComponent {
       return true;
     });
     this.getSelectedLearningSpaces();
+  }
+
+  // Delete Single Listed program Tag
+  deleteStandards(id: number) {
+    this.standards = this.standards.filter(g => {
+      if (g.id == id) {
+        g.selected = false;
+      }
+      return true;
+    });
+    this.getSelectedStandards();
   }
 }
 
