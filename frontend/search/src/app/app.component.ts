@@ -5,12 +5,13 @@ import { CurriculumService, dataStructure } from './curriculum.service';
 import { ProgramsPipe } from './programs.pipe';
 import { TagPipe } from './tag.pipe';
 import { LearningSpacePipe } from './learning-space.pipe';
+import { StandardPipe } from './standard.pipe';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [ProgramsPipe, TagPipe],
+  providers: [ProgramsPipe, TagPipe, LearningSpacePipe, StandardPipe],
   encapsulation: ViewEncapsulation.None,
   styles: [`
     .card.disabled {
@@ -61,10 +62,11 @@ export class AppComponent {
   selected_lesson_count: number = 0;
   standards = [];
   selected_standards;
-  selected_standards_count: number = 0;
+  selected_standard_count: number = 0;
+  raw_standards = [];
   time_estimates = [];
   selected_time_estimates;
-  selected_time_estimates_count: number = 0;
+  selected_time_estimate_count: number = 0;
 
   standards_bodies = {};
 
@@ -175,18 +177,21 @@ export class AppComponent {
         this.standards_bodies[standards_body.id] = standards_body;
       });
 
+      this.currService.getStandards(this.baseURL).subscribe((data:dataStructure) => {
+        let i=0;
+        data.items.forEach(standard => {
+          this.raw_standards.push(standard);
+          standard.combinedID = i;
+          this.standards_bodies[standard.standard_group.id].standards.push(standard)
+          i++;
+        });
+
+        for (const tmp in this.standards_bodies) {
+          if (this.standards_bodies[tmp].standards.length>0) this.standards.push(this.standards_bodies[tmp]);
+        }
+      });
+      console.log('Standards: ', this.standards);
     });
-
-    this.currService.getStandards(this.baseURL).subscribe((data:dataStructure) => {
-      data.items.forEach(standard => {
-        this.standards_bodies[standard.standard_group.id].standards.push(standard)
-      })
-
-      for (const tmp in this.standards_bodies) {
-        if (this.standards_bodies[tmp].standards.length>0) this.standards.push(this.standards_bodies[tmp]);
-      }
-    });
-
   }
 
   // Getting Selected programs and Count
@@ -237,14 +242,13 @@ export class AppComponent {
   // Getting Selected Time Estimates and Count
   getSelectedTimeEstimates() {
     this.selected_time_estimates = this.time_estimates.filter(s => {
-      console.log('S.selected: ', s)
       return s.selected;
     });
   }
 
   // Getting Selected programs and Count
   getSelectedStandards() {
-    this.selected_standards = this.standards.filter(s => {
+    this.selected_standards = this.raw_standards.filter(s => {
       return s.selected;
     });
   }

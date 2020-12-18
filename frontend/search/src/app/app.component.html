@@ -1,86 +1,45 @@
-<!-- <div class="row" id="selected_container">
-  <div class="col d-none d-md-block"> -->
-    <!-- Selected Programs-->
-    <!-- <div  class="row my-2" *ngIf="selected_programs">
-      <div class="col">
-        <div class="selected-programs-wrap">
-          <div class="selected-program" *ngFor="let s of selected_programs" >
-            <span class="badge badge-pill badge-primary float-left text-white mr-3 py-3 px-5">{{s.program_name}} <span class="delete-program" (click)="deleteProgram(s.id)" title="Click to delete" style="cursor:pointer;">X</span></span>
+<!-- Modal -->
+<div class="modal fade" id="standardsModal" tabindex="-1" role="dialog" aria-labelledby="standardsModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="standardsModal">Select Standards to filter by.</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col" *ngFor="let standard_body of standards">
+            <h5>{{ standard_body.standards_body }}</h5>
+            <ul id="standards_list" class="list-group select-list">
+              <li *ngFor="let t of standard_body.standards" class="standard-item list-group-item p-0 border-0">
+                <div class="custom-control custom-checkbox">
+                  <input class="custom-control-input"
+                            (change)="getSelectedStandards()"
+                            type="checkbox"
+                            id="standard_{{t.id}}"
+                            name="standard"
+                            value="{{t.id}}"
+                            [(ngModel)]="t.selected"/>
+                  <label class="custom-control-label topic-text text-muted ml-2" for="standard_{{t.id}}"><small style="font-weight: lighter !important;">{{t.standard}}</small></label>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    </div> -->
-
-        <!-- Selected Audiences-->
-    <!-- <div  class="row my-2" *ngIf="selected_audiences">
-      <div class="col">
-        <div class="selected-audience-wrap">
-          <div class="selected-audience" *ngFor="let s of selected_audiences" >
-            <span class="badge badge-pill badge-primary float-left text-white mr-3 py-3 px-5">{{s.age_range}} <span class="delete-audience" (click)="deleteAudience(s.id)" title="Click to delete" style="cursor:pointer;">X</span></span>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-        <!-- Selected Tags-->
-    <!-- <div  class="row my-2" *ngIf="selected_tags">
-      <div class="col">
-        <div class="selected-tags-wrap">
-          <div class="selected-tags" *ngFor="let s of selected_tags" >
-            <span class="badge badge-pill badge-primary float-left text-white mr-3 py-3 px-5">{{s.tag}} <span class="delete-tag" (click)="deleteTag(s.id)" title="Click to delete" style="cursor:pointer;">X</span></span>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-        <!-- Selected Topic-->
-    <!-- <div  class="row my-2" *ngIf="selected_topics">
-      <div class="col">
-        <div class="selected-topic-wrap">
-          <div class="selected-topic" *ngFor="let s of selected_topics" >
-            <span class="badge badge-pill badge-primary float-left text-white mr-3 py-3 px-5">{{s.topic}} <span class="delete-topic" (click)="deleteTopic(s.id)" title="Click to delete" style="cursor:pointer;">X</span></span>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- Selected Activity Type-->
-    <!-- <div  class="row my-2" *ngIf="selected_activity_types">
-      <div class="col">
-        <div class="selected-type-wrap">
-          <div class="selected-type" *ngFor="let s of selected_activity_types" >
-            <span class="badge badge-pill badge-primary float-left text-white mr-3 py-3 px-5">{{s.activity_type}} <span class="delete-type" (click)="deleteAssetType(s.id)" title="Click to delete" style="cursor:pointer;">X</span></span>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-        <!-- Selected Asset Type-->
-    <!-- <div  class="row my-2" *ngIf="selected_asset_types">
-      <div class="col">
-        <div class="selected-type-wrap">
-          <div class="selected-type" *ngFor="let s of selected_asset_types" >
-            <span class="badge badge-pill badge-primary float-left text-white mr-3 py-3 px-5">{{s.asset_type}} <span class="delete-type float-right" (click)="deleteAssetType(s.id)" title="Click to delete" style="cursor:pointer;">X</span></span>
-          </div>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div> -->
+  </div>
+</div>
 
 
-  <!-- Modules Only-->
-  <!-- <div  class="row my-2">
-    <div class="col">
-      <div class="modules-only-wrap">
-        <div class="modules-only" *ngIf="modulesOnly" >
-          <span class="badge badge-pill badge-primary float-left text-white mx-1">Modules Only <span class="delete-modules-only" (click)="deleteModulesOnly()" title="Click to delete" style="cursor:pointer;">X</span></span>
-        </div>
-      </div>
-    </div>
-  </div> -->
-<!-- </div> -->
 <div class="row">
   <div class="col-md-3">
-    <ngb-accordion #a="ngbAccordion" activeIds="custom-panel-1">
+    <ngb-accordion #a="ngbAccordion" activeIds="custom-panel-1" class="border-bottom">
       <!-- Program Panel -->
       <ngb-panel id="custom-panel-1">
         <ng-template ngbPanelHeader let-opened="opened" class="bg-white">
@@ -310,9 +269,13 @@
         </ng-template>
       </ngb-panel>
     </ngb-accordion>
+
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-link ml-2 mt-3" data-toggle="modal" data-target="#standardsModal">
+        <h5>Filter by Standards</h5>
+      </button>
   </div>
-
-
 
   <div class="col-md-9 pt-2">
     <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
@@ -320,7 +283,7 @@
         <a ngbNavLink><h5 class="my-lg-4 mx-lg-3">Modules</h5></a>
         <ng-template ngbNavContent>
           <div id="module_container">
-            <ul id="module_search_results" class="list-group search-results" *ngFor="let module of this.modules | programs: selected_programs | audiences: selected_audiences | tag: selected_tags | topic: selected_topics | learningSpace: selected_learning_spaces | timeEstimate: selected_time_estimates">
+            <ul id="module_search_results" class="list-group search-results" *ngFor="let module of this.modules | programs: selected_programs | audiences: selected_audiences | tag: selected_tags | topic: selected_topics | learningSpace: selected_learning_spaces | timeEstimate: selected_time_estimates | standard: selected_standards">
               <li class="list-group-item border-0">
                 <a href="{{ baseURL }}curriculum/modules/{{ module.id }}-{{ module.slug }}">
                   <h3 class="h3">
@@ -374,3 +337,10 @@
     <div [ngbNavOutlet]="nav" class="mt-2"></div>
   </div>
 </div>
+
+<!--modal-->
+<script>
+  $(document).ready(function() {
+    $("#exampleModalLong").modal();
+  });
+</script>

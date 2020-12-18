@@ -16,6 +16,7 @@ import { AssetTypePipe } from './asset-type.pipe';
 import { ActivityTypePipe } from './activity-type.pipe';
 import { LearningSpacePipe } from './learning-space.pipe';
 import { TimeEstimatePipe } from './time-estimate.pipe';
+import { StandardPipe } from './standard.pipe';
 
 @NgModule({
    declarations: [
@@ -30,6 +31,7 @@ import { TimeEstimatePipe } from './time-estimate.pipe';
       LearningSpacePipe,
       LearningSpacePipe,
       TimeEstimatePipe,
+      StandardPipe,
    ],
    imports: [
       BrowserModule,
