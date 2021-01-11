@@ -61,9 +61,9 @@
           <a id="tab-B" href="#pane-B" class="nav-link" data-toggle="tab" role="tab">
             <img class="d-none d-lg-inline-block pr-1" src="{% static 'images/icon-tab-details-inactive.svg' %}" role="presentation" alt="Clipboard Icon">
             {% if module.is_educator %}
-              Key Considerations
-            {% else %}
               Details
+            {% else %}
+              Key Considerations
             {% endif %}
           </a>
         </li>
@@ -168,7 +168,11 @@
             <div class="card-header" role="tab" id="heading-B">
               <h5 class="mb-0">
                 <a class="collapsed" data-toggle="collapse" href="#collapse-B" aria-expanded="false" aria-controls="collapse-B">
-                  Details
+                  {% if module.is_educator %}
+                    Details
+                  {% else %}
+                    Key Considerations
+                  {% endif %}
                 </a>
               </h5>
             </div>
@@ -185,7 +189,11 @@
             <div class="card-header" role="tab" id="heading-C">
               <h5 class="mb-0">
                 <a class="collapsed" data-toggle="collapse" href="#collapse-C" aria-expanded="false" aria-controls="Lessons">
-                  Lessons
+                  {% if module.is_educator %}
+                    Parts
+                  {% else %}
+                    Lessons
+                  {% endif %}
                 </a>
               </h5>
             </div>
