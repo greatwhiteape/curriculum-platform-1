@@ -209,7 +209,7 @@
         </ng-template>
       </ngb-panel>
       <!-- Activity Type Panel -->
-      <ngb-panel [disabled]="disabled" [cardClass]="disabled ? 'disabled' : ''">
+      <!-- <ngb-panel [disabled]="disabled" [cardClass]="disabled ? 'disabled' : ''">
         <ng-template ngbPanelHeader let-opened="opened">
           <div class="d-flex align-items-center justify-content-between">
             <button ngbPanelToggle class="btn btn-link container-fluid text-left pl-0">
@@ -237,7 +237,7 @@
             </li>
           </ul>
         </ng-template>
-      </ngb-panel>
+      </ngb-panel> -->
       <!-- Asset Type Panel -->
       <ngb-panel [disabled]="disabled" [cardClass]="disabled ? 'disabled' : ''">
         <ng-template ngbPanelHeader let-opened="opened">
@@ -300,7 +300,8 @@
         <a ngbNavLink><h5 class="my-lg-4 mx-lg-3">Lessons</h5></a>
         <ng-template ngbNavContent>
           <div id="activity_container">
-            <ul class="list-group" *ngFor="let activity of this.activities | programs: selected_programs | audiences: selected_audiences | tag: selected_tags | topic: selected_topics | activityType: selected_activity_types | learningSpace: selected_learning_spaces | timeEstimate: selected_time_estimates">
+            <!-- <ul class="list-group" *ngFor="let activity of this.activities | programs: selected_programs | audiences: selected_audiences | tag: selected_tags | topic: selected_topics | activityType: selected_activity_types | learningSpace: selected_learning_spaces | timeEstimate: selected_time_estimates"> -->
+              <ul class="list-group" *ngFor="let activity of this.activities | programs: selected_programs | audiences: selected_audiences | tag: selected_tags | topic: selected_topics | learningSpace: selected_learning_spaces | timeEstimate: selected_time_estimates">
               <ng-container>
                 <li class="list-group-item border-0">
                   <a href="{{ baseURL }}curriculum/activity/{{ activity.id }}-{{ activity.slug }}" target="_blank">
