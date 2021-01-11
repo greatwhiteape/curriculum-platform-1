@@ -78,7 +78,7 @@ class Module(ClusterableModel):
         blank=True
     )
     overview_copy = RichTextField(
-        verbose_name="Overview Tab Copy",
+        verbose_name="Details Tab Copy",
         null=True,
         blank=True
     )
@@ -98,7 +98,7 @@ class Module(ClusterableModel):
     learning_outcomes = RichTextField(
         null=True,
         blank=True,
-        verbose_name="Learning Outcomes (displays on Detail tab)"
+        verbose_name="Learning Outcomes (displays on Overview tab)"
     )
     teachers_desc = StreamField(
         [
