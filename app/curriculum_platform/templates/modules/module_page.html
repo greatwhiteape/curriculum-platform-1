@@ -131,6 +131,19 @@
                     </p>
                   </div>
                   {% endif %}
+
+                  {% if module.learningspace_relationship.all|length > 0 %}
+                  <div class="col col-md-4 py-3">
+                    <p>
+                      <strong>Learning Space</strong><br />
+                      <small class="grey-text">
+                        {% for learningspace in module.learningspace_relationship.all %}
+                          {{ learningspace.learning_space.learning_space }} {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
+                        {% endfor %}
+                      </small>
+                    </p>
+                  </div>
+                  {% endif %}
                 </div>
 
                 {% if module.standards_relationship.all|length > 0 %}
@@ -156,10 +169,10 @@
                   </div>
                 </div>
                 {% endif %}
-                <div class="my-4 py-4 border-top border-bottom">
+                <!-- <div class="my-4 py-4 border-top border-bottom">
                   <g:sharetoclassroom class="d-inline" size=32 url="{{ request.build_absolute_uri }}student-page"></g:sharetoclassroom>
                   <h5 class="d-inline mb-2 px-2 red-text"><small>Link Student Page in Google Classroom</small></h5>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
