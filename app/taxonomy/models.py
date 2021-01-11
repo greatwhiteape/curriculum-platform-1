@@ -149,7 +149,7 @@ class LearningSpace(models.Model):
     class Meta:
         managed = True
         verbose_name = 'Learning Space'
-        verbose_name_plural = 'Learning Space'
+        verbose_name_plural = 'Learning Spaces'
 
     createDate = models.DateTimeField(auto_now_add=True)
     modifiedDate = models.DateTimeField(auto_now=True)

@@ -117,7 +117,7 @@ class Asset(ClusterableModel):
         return audience
 
     @property
-    def learning_spaces(self):
+    def learning_space(self):
         learning_spaces = [
             n.learning_space for n in self.learningspace_relationship.all()
         ]
@@ -154,7 +154,7 @@ class Asset(ClusterableModel):
       SnippetChooserPanel("program"),
       SnippetChooserPanel('time_estimate'),
       InlinePanel('audience_relationship', label="Audience"),
-      InlinePanel('learning_space', label="Learning Space"),
+      InlinePanel('learningspace_relationship', label="Learning Space"),
       InlinePanel('standards_relationship', label="Standards Alignment"),
       InlinePanel('topic_relationship', label="Topics"),
       # InlinePanel('tag_relationship', label="Tags"),
@@ -170,7 +170,7 @@ class Asset(ClusterableModel):
         APIField("asset_type", serializer=AssetTypeSerializer()),
         APIField("topic", serializer=TopicSerializer()),
         APIField('asset_tag_relationship', serializer=TagSerializer()),
-        APIField("learning_space", serializer=LearningSpaceSerializer())
+        APIField("learningspace_relationship", serializer=LearningSpaceSerializer())
     ]
 
 class AssetTagRelationship(models.Model):
